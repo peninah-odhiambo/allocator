@@ -3,8 +3,8 @@
 """ DOJO
 
 Usage:
-create_room         LIVING|OFFICE	<room_name>
-add_person          FELLOW |STAFF	<first_name> <last_name> [--wants_acommodation = N]
+create_room                         <room_name> <room_type>
+add_person                      	<first_name> <last_name> <title>  [--wants_acommodation = 'N']
 allocate_person				        <identifier> <new_room_name>
 load_persons				        <filename>
 print_allocations 			        [--o=filename]
@@ -84,27 +84,54 @@ class Interactive (cmd.Cmd):
 
     @docopt_cmd
     def do_create_room (self,arg):
+        
+        """ Usage: create_room <room_name> <room_type> """
+
+        room_name = arg["<room_name>"]
+        room_type = arg["<room_type>"]
+
+        if room_name and room_type:
+            result = dojo.create_room (room_name, room_type)
 
     @docopt_cmd
     def do_add_person (self,arg):
 
+        """ Usage: add_person <first_name> <last_name> <title> [--wants_accomodation = 'N'] """
+
+        first_name = arg["<first_name>"]
+        last_name = arg["<last_name>"]
+        title = arg["<title>"]
+        wants_accomodation = arg["<wants_accomodation>"]
+
+        title == "FELLOW" or "STAFF"
+
+        if wants_accomodation is None:
+            wants_accomodation == "N"
+
+            print (self.dojo.add_person (first_name, last_name, title))
+
+        else:
+            print (self.dojo.add_person (first_name, last_name, title, wants_acommodation))
+
+
     @docopt_cmd
     def do_allocate_person (self,arg):
+        
 
-    @docopt_cmd
-    def do_load_persons (self,arg):
+#     @docopt_cmd
+#     def do_load_persons (self,arg):
 
-    @docopt_cmd
-    def do_print_rooms (self,arg):
+#     @docopt_cmd
+#     def do_print_rooms (self,arg):
 
-    @docopt_cmd
-    def do_save_state (self,arg):
+#     @docopt_cmd
+#     def do_save_state (self,arg):
 
-    @docopt_cmd
-    def do_load_state (self, arg):
+#     @docopt_cmd
+#     def do_load_state (self, arg):
 
   
-
+# # 
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
