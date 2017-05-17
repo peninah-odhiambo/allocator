@@ -67,19 +67,11 @@ class Dojo (object):
                 if len (livingspace.members) < capacity:
                     self.unallocated_livingspaces.append (livingspace)
                 elif len (livingspace.members) >= capacity:
-                    self.unallocated_livngspace.remove (livingspace)
+                    self.unallocated_livingspace.remove (livingspace)
 
         else:
             pass
 
-    # def random_office():
-
-    #     random_office = random.choice(self.unallocated_offices)
-    #     return random_office
-
-    # def random_livingspace():
-    #     random_livingspace = random.choice(self.unallocated_livingspaces)
-    #     return random_livingspace
 
 
     def add_person (self, first_name, last_name, person_title, wants_accomodation ="N"):
