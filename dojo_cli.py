@@ -3,15 +3,8 @@
 """ DOJO
 
 Usage:
-create_room                 <room_name> <room_type>
-add_person                  <first_name> <last_name> <title>  [--wants_acommodation = 'N']
-allocate_person             <identifier> <new_room_name>
-load_persons                <filename>
-print_allocations           [--o=filename]
-print_unallocated           [--o=filename]
-print_rooms                 <room_name>
-save_state                  [--db=sqlite_database]
-load_state                  <sqlite_database>
+dojo create_room                 <room_name> <room_type>
+dojo add_person                  <first_name> <last_name> <title>  [--wants_acommodation = 'N']
 
 
 Options:
@@ -19,13 +12,7 @@ Options:
 -h | --help Show this screen
 -v | --version
 
-create_room			Creates a new room
-add_person			Adds a new person
-allocate_person		Allocates person to a new room
-load_persons		Load persons from a created files
-print_room			Prints rooms created	
-save_state			Saves allocations of people and offices in the database		
-loads state			Loads up the state of people and rooms from the sqlite_database
+
 
 """
 
@@ -47,16 +34,14 @@ def docopt_cmd(func):
             opt = docopt(fn.__doc__, arg)
 
         except DocoptExit as e:
-            # The DocoptExit is thrown when the args do not match.
-            # We print a message to the user and the usage block.
+
 
             print('Invalid Command!')
             print(e)
             return
 
         except SystemExit:
-            # The SystemExit exception prints the usage for --help
-            # We do not need to do the print here.
+
 
             return
 
@@ -68,7 +53,7 @@ def docopt_cmd(func):
     return fn
 
 def start():
-    # os.system('clear')
+
     print ("LOADING DOJO >>>>>>>>>>>>>>>>>>")
 
     intro = 'Welcome to the DOJO SPACE ALLOCATION APP'
@@ -77,7 +62,7 @@ def start():
 
   
 
-class Interactive (cmd.Cmd):
+class Interactive(cmd.Cmd):
 
     dojo_prompt = 'DOJO'
     prompt = dojo_prompt
@@ -113,27 +98,14 @@ class Interactive (cmd.Cmd):
         else:
             print (self.dojo.add_person (first_name, last_name, title, wants_acommodation))
 
-
-    # @docopt_cmd
-    # def do_allocate_person (self,arg):
-
-
-#     @docopt_cmd
-#     def do_load_persons (self,arg):
-
-#     @docopt_cmd
-#     def do_print_rooms (self,arg):
-
-#     @docopt_cmd
-#     def do_save_state (self,arg):
-
-#     @docopt_cmd
-#     def do_load_state (self, arg):
-
-  
-# # 
     @docopt_cmd
-    def do_quit(self, arg):
+    def do_clear(self, arg):
+        """Clears screen"""
+        os.system("clear")
+
+
+    @docopt_cmd
+    def do_quit(self,arg):
         """Quits out of Interactive Mode."""
 
         print('Visit Soon!')
@@ -142,7 +114,8 @@ class Interactive (cmd.Cmd):
 opt = docopt(__doc__, sys.argv[1:])
 
 if opt['--interactive']:
+    os.system("clear")
     start()
-    Interactive().cmdloop()
+    interactive().cmdloop()
 
 print(opt)
