@@ -72,17 +72,27 @@ class Dojo (object):
         else:
             pass
 
+    # def random_office():
+
+    #     random_office = random.choice(self.unallocated_offices)
+    #     return random_office
+
+    # def random_livingspace():
+    #     random_livingspace = random.choice(self.unallocated_livingspaces)
+    #     return random_livingspace
+
 
     def add_person (self, first_name, last_name, person_title, wants_accomodation ="N"):
         person_name = first_name + spacer + last_name
         self.person_title = person_title
+        random_livingspace = random.choice(self.unallocated_livingspaces)
+        random_office = random.choice(self.unallocated_offices)
 
         "Adds person and Allocates to room """
 
-        # new_persons = []
+        # self.allocated_offices = random_office
         person_names = [person.person_name for person in self.persons]
 
-        # for person in person.person_name:
         if person_name in person_names:
             return "Sorry! Name exists, please modify name"
 
@@ -92,19 +102,32 @@ class Dojo (object):
                 self.persons.append(new_person)
                 self.fellows.append (new_person)
                 self.unallocated_persons.append (new_person)
+                random_office.occupants.append(Person(first_name, last_name, person_title, wants_accomodation))
+                if wants_accomodation == "Y":
+                    random_livingspace.occupants.append(Person(first_name, last_name, person_title, wants_accomodation = 'Y'))
+                else:
+                    pass
+        
 
             elif person_title == "STAFF":
                 new_person = Person(person_name, person_title, wants_accomodation)
                 self.persons.append(new_person)
                 self.staff.append (new_person)
                 self.unallocated_persons.append (new_person)
+                random_office.occupants.append(Person(first_name, last_name, person_title, wants_accomodation))
+                if wants_accomodation == 'Y':
+                    msg = "Sorry! Living Space for FELLOWS only"
+                    return msg
+                else:
+                    pass
+
+        
+
 
 dojo = Dojo()
 dojo.create_room ('MAMA', 'OFFICE')
 dojo.create_room ('WEWE', 'LIVING')
 print (len(dojo.offices))
-
-dojo = Dojo()
 dojo.add_person ('NELLY', 'OUMA', 'FELLOW', "Y")
 dojo.add_person ('ANINI', 'HELIDA', 'STAFF', "Y")
 print (len(dojo.fellows))
