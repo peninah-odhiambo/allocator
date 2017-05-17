@@ -1,6 +1,6 @@
 import random
-from room import Room, Office, Living
-from people import Person, Staff, Fellow
+from room_model import Room, Office, Living
+from people_model import Person, Staff, Fellow
 
 spacer = " "
 
@@ -35,7 +35,7 @@ class Dojo (object):
             self.offices.append(new_office)
             msg = "Office called %s has been created succesfully!" %room_name
             return msg
-            print "Name: " + new_office.room_name + "  |  Type: " + new_office.room_type
+            print ("Name: " + new_office.room_name + "  |  Type: " + new_office.room_type)
 
         elif room_type == 'LIVING':
             new_livingspace = Living(room_name, room_type)
@@ -44,7 +44,7 @@ class Dojo (object):
             self.livingspaces.append (new_livingspace)
             msg = "Living Space called %s has been created succesfully!" %room_name
             return msg
-            print "Name: " + new_livingspace.room_name + "  |  Type: " + new_livingspace.room_type
+            print ("Name: " + new_livingspace.room_name + "  |  Type: " + new_livingspace.room_type)
 
         else:
             room_names = [room.room_name for room in self.rooms]
@@ -80,24 +80,24 @@ class Dojo (object):
         "Adds person and Allocates to room """
 
         # new_persons = []
-        person_name = [person.person_name for person in self.persons]
+        person_names = [person.person_name for person in self.persons]
 
-        for person in person.person_name:
-            if person.person_name in person_name:
-                return "Sorry! Name exists, please modify name"
+        # for person in person.person_name:
+        if person_name in person_names:
+            return "Sorry! Name exists, please modify name"
 
-            else:
-                if person_title == "FELLOW":
-                    new_person = person_name
-                    self.persons.append(new_person)
-                    self.fellows.append (new_person)
-                    self.unallocated_persons (new_person)
+        else:
+            if person_title == "FELLOW":
+                new_person = Person(person_name, person_title, wants_accomodation)
+                self.persons.append(new_person)
+                self.fellows.append (new_person)
+                self.unallocated_persons.append (new_person)
 
-                elif person_title == "STAFF":
-                    new_person = person_name
-                    self.persons.append(new_person)
-                    self.staff.append (new_person)
-                    self.unallocated_persons (new_person)
+            elif person_title == "STAFF":
+                new_person = Person(person_name, person_title, wants_accomodation)
+                self.persons.append(new_person)
+                self.staff.append (new_person)
+                self.unallocated_persons.append (new_person)
 
 dojo = Dojo()
 dojo.create_room ('MAMA', 'OFFICE')
@@ -106,7 +106,8 @@ print (len(dojo.offices))
 
 dojo = Dojo()
 dojo.add_person ('NELLY', 'OUMA', 'FELLOW', "Y")
-print (len(dojo.persons))
+dojo.add_person ('ANINI', 'HELIDA', 'STAFF', "Y")
+print (len(dojo.fellows))
 
 
 
