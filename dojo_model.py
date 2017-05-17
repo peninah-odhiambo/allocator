@@ -27,30 +27,31 @@ class Dojo (object):
 
 
     def create_room (self, room_name, room_type):
-
-        if room_type == 'OFFICE':
-            new_office = Office(room_name, room_type)
-            self.rooms.append(new_office)
-            self.unallocated_offices.append (new_office)
-            self.offices.append(new_office)
-            msg = "Office called %s has been created succesfully!" %room_name
+        room_names = [room.room_name for room in self.rooms]
+        if room_name in room_names:
+            msg = "Sorry! %s exists.  Please choose another one" %room_name
             return msg
-            print ("Name: " + new_office.room_name + "  |  Type: " + new_office.room_type)
-
-        elif room_type == 'LIVING':
-            new_livingspace = Living(room_name, room_type)
-            self.rooms.append(new_livingspace)
-            self.unallocated_livingspaces.append(new_livingspace)
-            self.livingspaces.append (new_livingspace)
-            msg = "Living Space called %s has been created succesfully!" %room_name
-            return msg
-            print ("Name: " + new_livingspace.room_name + "  |  Type: " + new_livingspace.room_type)
-
         else:
-            room_names = [room.room_name for room in self.rooms]
-            if room.room_name == room_name:
-                msg = "Sorry! %s exists.  Please choose another one" %room_name
+            if room_type == 'OFFICE':
+                new_office = Office(room_name, room_type)
+                self.rooms.append(new_office)
+                self.unallocated_offices.append (new_office)
+                self.offices.append(new_office)
+                msg = "Office called %s has been created succesfully!" %room_name
                 return msg
+                print ("Name: " + new_office.room_name + "  |  Type: " + new_office.room_type)
+            
+            elif room_type == 'LIVING':
+                new_livingspace = Living(room_name, room_type)
+                self.rooms.append(new_livingspace)
+                self.unallocated_livingspaces.append(new_livingspace)
+                self.livingspaces.append (new_livingspace)
+                msg = "Living Space called %s has been created succesfully!" %room_name
+                return msg
+                print ("Name: " + new_livingspace.room_name + "  |  Type: " + new_livingspace.room_type)
+            else:
+                pass
+
 
     def unallocated_rooms (self, room_name, room_type):
         if room_type == 'OFFICE':
@@ -69,20 +70,15 @@ class Dojo (object):
                 elif len (livingspace.members) >= capacity:
                     self.unallocated_livingspace.remove (livingspace)
 
-        else:
-            pass
-
-
 
     def add_person (self, first_name, last_name, person_title, wants_accomodation ="N"):
+        """Adds person and Allocates to room """
         person_name = first_name + spacer + last_name
         self.person_title = person_title
         random_livingspace = random.choice(self.unallocated_livingspaces)
         random_office = random.choice(self.unallocated_offices)
 
-        "Adds person and Allocates to room """
 
-        # self.allocated_offices = random_office
         person_names = [person.person_name for person in self.persons]
 
         if person_name in person_names:
