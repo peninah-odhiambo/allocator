@@ -13,13 +13,6 @@ class TestDojo (unittest.TestCase):
     
     def setUp (self):
         self.dojo = Dojo()
-        self.dojo.offices = []
-        self.dojo.livingspaces = []
-        self.dojo.vacant_rooms = []
-        self.dojo.vacant_offices = []
-        self.dojo.vacant_livingspaces = []
-        self.dojo.rooms = []
-
 
     def test_create_room (self):
 
@@ -52,10 +45,8 @@ class TestDojo (unittest.TestCase):
         """ Tests if room created already exists """
 
         self.dojo.create_room ("MARS", "OFFICE")
-        room_names = [room.room_name for room in self.dojo.rooms]
-        self.assertIn ("MARS", self.room_name)
-        entry = self.dojo.create_room ("MARS", "OFFICE")
-        self.assertEqual(entry, "Sorry, Room Name already exists.  Kindly Choose another name")
+        self.dojo.create_room ("MARS", "OFFICE")
+        self.assertEqual(len(self.dojo.rooms), 1)
 
 if __name__ == "__main__":
     unittest.main()
