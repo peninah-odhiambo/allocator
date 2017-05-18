@@ -1,3 +1,5 @@
+import unittest
+
 spacer = " "
 
 
@@ -35,4 +37,5 @@ class Livingspace(Room):
     def __repr__(self):
         return "<Living space %s %s>" % (self.room_name, self.room_type)
 
-    
+
+unittest.main()
