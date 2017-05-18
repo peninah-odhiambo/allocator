@@ -10,11 +10,11 @@ class TestDojo (unittest.TestCase):
     def setUp (self):
         self.dojo = Dojo()
         self.dojo.create_room ('NAI', 'OFFICE')
-        self.dojo.create_room ('BLUE', 'LIVING')
+        self.dojo.create_room ('BLUE', 'LIVINGSPACE')
         self.dojo.add_person ("RUTH", "MASIKA", "FELLOW", "N")
 
 
-    def test_add_person (self): 
+    def test_add_person (self):
         """ Tests if person is added in the system """
 
         self.assertEqual (len(self.dojo.persons), 1)
@@ -40,7 +40,7 @@ class TestDojo (unittest.TestCase):
 
         """ Tests if fellow is allocated a Living space successfully """
 
-        self.dojo.create_room ("MARS", "LIVING")
+        self.dojo.create_room ("MARS", "LIVINGSPACE")
         self.assertEqual (len(self.dojo.livingspaces), 2)
         self.dojo.add_person ("ROSE", "FELLOW", "Y")
         self.assertEqual (len(self.dojo.rooms), 3, "Fellow Living Space allocation Successful!")
@@ -58,7 +58,7 @@ class TestDojo (unittest.TestCase):
 
         """ Tests thats staff is not allocated living space """
 
-        self.dojo.create_room ("PLUTO", "LIVING")
+        self.dojo.create_room ("PLUTO", "LIVINGSPACE")
         self.assertEqual (len(self.dojo.livingspaces),2)
         self.dojo.add_person ("PAULA", "STAFF", "Y")
         self.assertEqual (len(self.dojo.rooms), 3, "Sorry, Living Space available for Fellows Only")
