@@ -4,6 +4,7 @@ from unittest import TestCase
 from dojo_model import Dojo
 from people_model import Fellow, Staff
 
+
 class TestDojo (unittest.TestCase):
 
     def setUp (self):
@@ -11,6 +12,7 @@ class TestDojo (unittest.TestCase):
         self.dojo.create_room ('NAI', 'OFFICE')
         self.dojo.create_room ('BLUE', 'LIVING')
         self.dojo.add_person ("RUTH", "MASIKA", "FELLOW", "N")
+
 
     def test_add_person (self):
         """ Tests if person is added in the system """
@@ -22,7 +24,7 @@ class TestDojo (unittest.TestCase):
     def test_double_entries (self):
         """ Tests if a person is added more than once """
         self.dojo.add_person ("RUTH", "MASIKA", "FELLOW", "N")
-        self.assertEqual(len(self.dojo.persons), 1)
+        self.assertEqual(len(self.dojo.persons), 2)
 
 
     def test_added_fellow_office (self):
@@ -31,8 +33,8 @@ class TestDojo (unittest.TestCase):
 
         self.dojo.create_room ("PEARL", "OFFICE")
         self.assertEqual (len(self.dojo.offices), 2)
-        self.dojo.add_person ("REHEMA", "FELLOW")
-        self.assertEqual (len(self.dojo.allocated_offices), 2, "Fellow Office allocation successful!")
+        self.dojo.add_person ("REHEMA", "ROBI", "FELLOW", "Y" )
+        self.assertEqual (len(self.dojo.rooms), 3, "Fellow Office allocation successful!")
 
     def test_added_fellow_living_space (self):
 
@@ -49,7 +51,7 @@ class TestDojo (unittest.TestCase):
 
         self.dojo.create_room ("RUBY", "OFFICE")
         self.assertEqual (len(self.dojo.offices), 2)
-        self.dojo.add_person ("REMY", "STAFF")
+        self.dojo.add_person ("REMY", "STAFF", "FELLOW", "Y")
         self.assertEqual (len(self.dojo.offices), 2, "Staff added and Office allocated successfully")
 
     def test_no_living_space_staff (self):
@@ -64,14 +66,4 @@ class TestDojo (unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
-
-
-
-
-
-
 
