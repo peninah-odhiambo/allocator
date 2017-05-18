@@ -1,5 +1,4 @@
 import unittest
-import sys
 from unittest import TestCase
 from dojo_model import Dojo
 from people_model import Fellow, Staff
@@ -10,7 +9,7 @@ class TestDojo (unittest.TestCase):
     def setUp (self):
         self.dojo = Dojo()
         self.dojo.create_room ('NAI', 'OFFICE')
-        self.dojo.create_room ('BLUE', 'LIVINGSPACE')
+        self.dojo.create_room ('BLUE', 'LIVING')
         self.dojo.add_person ("RUTH", "MASIKA", "FELLOW", "N")
 
 
@@ -40,7 +39,7 @@ class TestDojo (unittest.TestCase):
 
         """ Tests if fellow is allocated a Living space successfully """
 
-        self.dojo.create_room ("MARS", "LIVINGSPACE")
+        self.dojo.create_room ("MARS", "LIVING")
         self.assertEqual (len(self.dojo.livingspaces), 2)
         self.dojo.add_person ("ROSE", "FELLOW", "Y")
         self.assertEqual (len(self.dojo.rooms), 3, "Fellow Living Space allocation Successful!")
@@ -58,7 +57,7 @@ class TestDojo (unittest.TestCase):
 
         """ Tests thats staff is not allocated living space """
 
-        self.dojo.create_room ("PLUTO", "LIVINGSPACE")
+        self.dojo.create_room ("PLUTO", "LIVING")
         self.assertEqual (len(self.dojo.livingspaces),2)
         self.dojo.add_person ("PAULA", "STAFF", "Y")
         self.assertEqual (len(self.dojo.rooms), 3, "Sorry, Living Space available for Fellows Only")
