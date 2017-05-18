@@ -22,7 +22,6 @@ class TestDojo (unittest.TestCase):
         """Tests if office is created and if more than one office can be created """
 
         self.assertEqual(len(self.dojo.offices), 0)
-        # self.dojo.create_room ("GOLD", "OFFICE")
         self.dojo.create_room ("DIAMOND", "OFFICE")
         self.assertEqual(len(self.dojo.offices), 1)
 
