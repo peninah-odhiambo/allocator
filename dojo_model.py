@@ -108,3 +108,39 @@ class Dojo (object):
                 if wants_accomodation == 'Y':
                     msg = "Sorry! Living Space for FELLOWS only"
                     print (msg)
+
+    def print_room (self, room_name):
+        self.room_name = room_name
+
+        room_names = [room.room_name for room in self.rooms]
+        if room_name not in room_names:
+            msg = "Sorry! Room does not exist. Check spelling"
+            print (msg)
+
+        else:
+            if room_name in room_names:
+                f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
