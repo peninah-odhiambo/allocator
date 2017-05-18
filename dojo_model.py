@@ -30,7 +30,7 @@ class Dojo (object):
         room_names = [room.room_name for room in self.rooms]
         if room_name in room_names:
             msg = "Sorry! %s exists.  Please choose another one" %room_name
-            return msg
+            print (msg)
         else:
             if room_type == 'OFFICE':
                 new_office = Office(room_name, room_type)
@@ -38,8 +38,7 @@ class Dojo (object):
                 self.unallocated_offices.append (new_office)
                 self.offices.append(new_office)
                 msg = "Office called %s has been created succesfully!" %room_name
-                return msg
-                print ("Name: " + new_office.room_name + "  |  Type: " + new_office.room_type)
+                print (msg)
             
             elif room_type == 'LIVING':
                 new_livingspace = Living(room_name, room_type)
@@ -47,8 +46,7 @@ class Dojo (object):
                 self.unallocated_livingspaces.append(new_livingspace)
                 self.livingspaces.append (new_livingspace)
                 msg = "Living Space called %s has been created succesfully!" %room_name
-                return msg
-                print ("Name: " + new_livingspace.room_name + "  |  Type: " + new_livingspace.room_type)
+                print (msg)
             else:
                 pass
 
@@ -71,10 +69,10 @@ class Dojo (object):
                     self.unallocated_livingspace.remove (livingspace)
 
 
-    def add_person (self, first_name, last_name, person_title, wants_accomodation ="N"):
+    def add_person (self, first_name, last_name, title, wants_accomodation ="N"):
         """Adds person and Allocates to room """
         person_name = first_name + spacer + last_name
-        self.person_title = person_title
+        self.title = title
         random_livingspace = random.choice(self.unallocated_livingspaces)
         random_office = random.choice(self.unallocated_offices)
 
@@ -82,33 +80,37 @@ class Dojo (object):
         person_names = [person.person_name for person in self.persons]
 
         if person_name in person_names:
-            return "Sorry! Name exists, please modify name"
+            print ("Sorry! Name exists, please modify name")
 
         else:
-            if person_title == "FELLOW":
-                new_person = Person(person_name, person_title, wants_accomodation)
+            if title == "FELLOW":
+                new_person = Person(person_name, title, wants_accomodation)
                 self.persons.append(new_person)
                 self.fellows.append (new_person)
                 self.unallocated_persons.append (new_person)
-                random_office.occupants.append(Person(first_name, last_name, person_title, wants_accomodation))
+                random_office.occupants.append(new_person)
+                msg = "Fellow called %s has been added successfully!" %person_name
+                print (msg)
+                
                 if wants_accomodation == "Y":
-                    random_livingspace.occupants.append(Person(first_name, last_name, person_title, wants_accomodation = 'Y'))
+                    random_livingspace.occupants.append(Person(first_name, last_name, title, wants_accomodation = 'Y'))
+                    msg = "Fellow called %s has been allocated %s!" %(person_name, random_livingspace.room_name)
+                    print (msg)
+
                 else:
                     pass
         
 
-            elif person_title == "STAFF":
-                new_person = Person(person_name, person_title, wants_accomodation)
+            elif title == "STAFF":
+                new_person = Person(person_name, title, wants_accomodation)
                 self.persons.append(new_person)
                 self.staff.append (new_person)
                 self.unallocated_persons.append (new_person)
-                random_office.occupants.append(Person(first_name, last_name, person_title, wants_accomodation))
+                random_office.occupants.append(new_person)
                 if wants_accomodation == 'Y':
                     msg = "Sorry! Living Space for FELLOWS only"
-                    return msg
-                else:
-                    pass
-
+                    print (msg)
+                
         
 
 
