@@ -16,7 +16,7 @@ class Person(object):
 
 class Staff(Person):
 
-    job_type = "STAFF"
+    job_type = "STAFF" 
 
     def __init__(self,first_name, last_name, title, wants_accomodation = "N"):
 
