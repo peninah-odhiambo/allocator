@@ -11,10 +11,10 @@ class TestDojo (unittest.TestCase):
         self.dojo = Dojo()
         self.dojo.create_room ('NAI', 'OFFICE')
         self.dojo.create_room ('BLUE', 'LIVING')
-        self.dojo.add_person ("MARY", "MASIKA", "FELLOW", "N")
+        self.dojo.add_person ("RUTH", "MASIKA", "FELLOW", "N")
 
 
-    def test_add_person (self):
+    def test_add_person (self): 
         """ Tests if person is added in the system """
 
         self.assertEqual (len(self.dojo.persons), 1)
