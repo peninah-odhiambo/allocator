@@ -1,5 +1,3 @@
-import unittest
-
 spacer = " "
 
 
@@ -8,7 +6,7 @@ class Person(object):
     """ Fellow and Staff inherit from the Class Person"""
 
     def __init__(self, first_name, last_name, title, wants_accomodation = "N"):
-
+ 
         self.person_name = first_name + spacer + last_name
         self.title = title  
 
@@ -18,7 +16,7 @@ class Person(object):
 
 class Staff(Person):
 
-    job_type = "STAFF" 
+    job_type = "STAFF"
 
     def __init__(self,first_name, last_name, title, wants_accomodation = "N"):
 
@@ -34,10 +32,8 @@ class Fellow(Person):
     job_type = "FELLOW"
 
     def __init__(self, first_name, last_name, title, wants_accomodation = "N"):
-        super(Fellow, self).__init__(self.name)
+        super(Fellow, self).__init__(self.person_name)
         self.id = person_id
 
     def __repr__(self):
         return "<Fellow %s>" % self.person_name
-
-unittest.main()

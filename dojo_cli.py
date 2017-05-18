@@ -57,28 +57,30 @@ def docopt_cmd(func):
 
 class Interactive (cmd.Cmd):
 
-    print("=" * 30 + "\nWELCOME\n" + "=" * 30)
+    print("                 x----------------------------------------------x                  ")
+    print("                 x----------------------------------------------x                  ")
+    print(spacer)
+    print("                     ALLOCATIONS MADE EASIER AND FASTER!!!                         ")
+    print(spacer)
+    print("                 x----------------------------------------------x                  ")
+    print("                 x----------------------------------------------x                  ")
+    print(spacer)
+    intro = "                         >>> LETS ROOM UP!!! <<<                     "
     print (spacer)
-    print (spacer)
-    intro = "ALLOCATION MADE EASIER AND FASTER"
     prompt = "> "
     print (spacer)
-    print (spacer)
-    print("=" * 60)
-    print (spacer)
-    print (spacer)
+
     
 
 
     @docopt_cmd
     def do_create_room(self, arg):
         """Usage: create_room <room_type> <room_name>..."""
-
-        room_name = arg["<room_name>"]
-        room_type = arg["<room_type>"]
-
-        if room_name and room_type:
+     
+        for room_name in arg["<room_name>"]:
+            room_type = arg["<room_type>"]
             dojo.create_room (room_name, room_type)
+            print (spacer)
 
 
     @docopt_cmd

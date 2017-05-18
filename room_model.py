@@ -1,9 +1,4 @@
-import unittest
-
-spacer = " "
-
-
-class Room(object):
+class Room(object): 
 
     """ Office and Living space inherits from the Class Room """
     
@@ -38,4 +33,3 @@ class Livingspace(Room):
         return "<Living space %s %s>" % (self.room_name, self.room_type)
 
 
-unittest.main()

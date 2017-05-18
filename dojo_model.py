@@ -9,7 +9,7 @@ class Dojo (object):
 
     """ The Class Dojo is the main class that hold subclasses like Office, Living Space, Fellow, Staff """
 
-    def __init__(self):
+    def __init__(self): 
         self.rooms = []
         self.allocated_rooms = []
         self.unallocated_rooms = []
@@ -30,6 +30,7 @@ class Dojo (object):
         if room_name in room_names:
             msg = "Sorry! %s exists.  Please choose another one" %room_name
             print (msg)
+
         else:
             if room_type == 'OFFICE':
                 new_office = Office(room_name, room_type)
@@ -46,9 +47,10 @@ class Dojo (object):
                 self.livingspaces.append (new_livingspace)
                 msg = "Living Space called %s has been created succesfully!" %room_name
                 print (msg)
-            else:
-                pass
 
+            elif room_type != 'OFFICE' or room_type != 'LIVINGSPACE':
+                msg = 'Sorry, Choose room type OFFICE or LIVINGSPACE'
+                print (msg)
 
     def unallocated_rooms (self, room_name, room_type):
         if room_type == 'OFFICE':
@@ -75,9 +77,7 @@ class Dojo (object):
         random_livingspace = random.choice(self.unallocated_livingspaces)
         random_office = random.choice(self.unallocated_offices)
 
-
         person_names = [person.person_name for person in self.persons]
-
         if person_name in person_names:
             print ("Sorry! Name exists, please modify name")
 
@@ -87,27 +87,43 @@ class Dojo (object):
                 self.persons.append(new_person)
                 self.fellows.append (new_person)
                 self.unallocated_persons.append (new_person)
-                random_office.occupants.append(new_person)
-                msg = "Fellow called %s has been added successfully and allocated %s!"\
-                %(person_name, random_office.room_name)
-                print (msg)
+                if len(random_office.occupants) < random_office.capacity:
+                    random_office.occupants.append(new_person)
+                    msg = "Staff called %s has been added successfully and allocated  Office %s!"\
+                    %(person_name, random_office.room_name)
+                    print (msg)
+                else:
+                    print ("Room capacity full!")
                 
                 if wants_accomodation == "Y":
-                    random_livingspace.occupants.append(Person(first_name, last_name, title, wants_accomodation = 'Y'))
-                    msg = "Fellow called %s has been allocated %s!" %(person_name, random_livingspace.room_name)
-                    print (msg)     
+                    if len(random_livingspace.occupants) < random_livingspace.capacity:
+                        random_livingspace.occupants.append(new_person)
+                        msg = "Staff called %s has been added successfully and allocated Livingspace %s!"\
+                        %(person_name, random_livingspace.room_name)
+                        print (msg)
+                    else:
+                        print ("Room capacity full!")
+                        # random_livingspace.occupants.append(Person(first_name, last_name, title, wants_accomodation = 'Y'))
+                        # msg = "Fellow called %s has been allocated Living space %s!" \
+                        # %(person_name, random_livingspace.room_name)
+                        # print (msg)     
 
             elif title == "STAFF":
                 new_person = Person(person_name, title, wants_accomodation)
                 self.persons.append(new_person)
                 self.staff.append (new_person)
                 self.unallocated_persons.append (new_person)
-                random_office.occupants.append(new_person)
-                msg = "Staff called %s has been added successfully and allocated %s!"\
-                %(person_name, random_office.room_name)
-                if wants_accomodation == 'Y':
-                    msg = "Sorry! Living Space for FELLOWS only"
+                if len(random_office.occupants) < random_office.capacity:
+                    random_office.occupants.append(new_person)
+                    msg = "Staff called %s has been added successfully and allocated  Office %s!"\
+                    %(person_name, random_office.room_name)
                     print (msg)
+                else:
+                    print ("Room capacity full!")
+
+                if wants_accomodation == 'Y':
+                    msg_error = "Sorry! Living Space for FELLOWS only"
+                    print(msg_error)
 
     def print_room (self, room_name):
         self.room_name = room_name
