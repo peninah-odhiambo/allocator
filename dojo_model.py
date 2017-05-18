@@ -25,7 +25,6 @@ class Dojo (object):
         self.fellows = []
         self.staff = []
 
-
     def create_room (self, room_name, room_type):
         room_names = [room.room_name for room in self.rooms]
         if room_name in room_names:
@@ -89,7 +88,8 @@ class Dojo (object):
                 self.fellows.append (new_person)
                 self.unallocated_persons.append (new_person)
                 random_office.occupants.append(new_person)
-                msg = "Fellow called %s has been added successfully!" %person_name
+                msg = "Fellow called %s has been added successfully and allocated %s!"\
+                %(person_name, random_office.room_name)
                 print (msg)
                 
                 if wants_accomodation == "Y":
@@ -107,6 +107,8 @@ class Dojo (object):
                 self.staff.append (new_person)
                 self.unallocated_persons.append (new_person)
                 random_office.occupants.append(new_person)
+                msg = "Staff called %s has been added successfully and allocated %s!"\
+                %(person_name, random_office.room_name)
                 if wants_accomodation == 'Y':
                     msg = "Sorry! Living Space for FELLOWS only"
                     print (msg)
