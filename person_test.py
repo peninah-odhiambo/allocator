@@ -6,7 +6,7 @@ from people_model import Fellow, Staff
 
 class TestDojo (unittest.TestCase):
 
-    def setUp (self):
+    def setUp (self): 
         self.dojo = Dojo()
         self.dojo.create_room ('NAI', 'OFFICE')
         self.dojo.create_room ('BLUE', 'LIVING')
