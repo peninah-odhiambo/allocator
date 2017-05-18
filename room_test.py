@@ -2,7 +2,7 @@ import unittest
 import sys
 from unittest import TestCase
 from dojo_model import Dojo
-from room_model import Room, Office, Living
+from room_model import Room, Office, Livingspace
 
 
 class TestDojo (unittest.TestCase):
@@ -27,12 +27,12 @@ class TestDojo (unittest.TestCase):
 
     def test_created_livingspace (self):
 
-        """ Tests if office is created and if more than one living space can be created """
+        """ Tests if living is created and if more than one living space can be created """
 
         self.assertEqual (len(self.dojo.livingspaces), 0)
         self.dojo.create_room ("MERCURY", "LIVING")
-        self.dojo.create_room ("VENUS", "LIVINGSPACE")
-        self.assertEqual(len(self.dojo.livingspaces), 1)
+        self.dojo.create_room ("VENUS", "LIVING")
+        self.assertEqual(len(self.dojo.livingspaces), 2)
 
 
     def test_room_name_repeated (self):
@@ -42,6 +42,11 @@ class TestDojo (unittest.TestCase):
         self.dojo.create_room ("MARS", "OFFICE")
         self.dojo.create_room ("MARS", "OFFICE")
         self.assertEqual(len(self.dojo.rooms), 1)
+
+    def test_print_room (self):
+        """ Prints  the names of all the people in room_name on the screen"""
+
+
 
 if __name__ == "__main__":
     unittest.main()
