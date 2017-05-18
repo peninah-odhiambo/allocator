@@ -25,12 +25,12 @@ class Office(Room):
         return "<Office %s %s>" % (self.room_name, self.room_type)
 
 
-class Living(Room):
+class Livingspace(Room):
 
     capacity = 4
 
     def __init__(self, room_name, room_type):
-        super(Living, self).__init__(room_name, room_type)
+        super(Livingspace, self).__init__(room_name, room_type)
 
     def __repr__(self):
         return "<Living space %s %s>" % (self.room_name, self.room_type)
