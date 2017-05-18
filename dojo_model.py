@@ -1,5 +1,5 @@
 import random
-from room_model import Room, Office, Living
+from room_model import Room, Office, Livingspace
 from people_model import Person, Staff, Fellow
 
 spacer = " "
@@ -39,8 +39,8 @@ class Dojo (object):
                 msg = "Office called %s has been created succesfully!" %room_name
                 print (msg)
             
-            elif room_type == 'LIVING':
-                new_livingspace = Living(room_name, room_type)
+            elif room_type == 'LIVINGSPACE':
+                new_livingspace = Livingspace(room_name, room_type)
                 self.rooms.append(new_livingspace)
                 self.unallocated_livingspaces.append(new_livingspace)
                 self.livingspaces.append (new_livingspace)
@@ -59,7 +59,7 @@ class Dojo (object):
                 elif len (office.members) >= office.capacity:
                     self.unallocated_offices.remove(office)
 
-        elif room_type == 'LIVING':
+        elif room_type == 'LIVINGSPACE':
             capacity = 4
             for livingspace in self.livingspace:
                 if len (livingspace.members) < capacity:
@@ -95,11 +95,7 @@ class Dojo (object):
                 if wants_accomodation == "Y":
                     random_livingspace.occupants.append(Person(first_name, last_name, title, wants_accomodation = 'Y'))
                     msg = "Fellow called %s has been allocated %s!" %(person_name, random_livingspace.room_name)
-                    print (msg)
-
-                else:
-                    pass
-        
+                    print (msg)     
 
             elif title == "STAFF":
                 new_person = Person(person_name, title, wants_accomodation)
@@ -112,22 +108,3 @@ class Dojo (object):
                 if wants_accomodation == 'Y':
                     msg = "Sorry! Living Space for FELLOWS only"
                     print (msg)
-                
-        
-
-
-dojo = Dojo()
-dojo.create_room ('MAMA', 'OFFICE')
-dojo.create_room ('WEWE', 'LIVING')
-print (len(dojo.offices))
-dojo.add_person ('NELLY', 'OUMA', 'FELLOW', "Y")
-dojo.add_person ('ANINI', 'HELIDA', 'STAFF', "Y")
-print (len(dojo.fellows))
-
-
-
-
-
-
-
-
