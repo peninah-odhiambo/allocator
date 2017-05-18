@@ -24,9 +24,8 @@ import cmd
 from docopt import docopt, DocoptExit
 from dojo_model import Dojo
 from people_model import Fellow, Staff
-from room_model import Living, Office
-# from pyfiglet import figlet_format
-# from termcolor import cprint , colored
+from room_model import Livingspace, Office
+
 dojo = Dojo()
 spacer = " "
 
@@ -85,7 +84,6 @@ class Interactive (cmd.Cmd):
     @docopt_cmd
     def do_add_person(self, arg):
         """Usage: add_person <first_name> <last_name> <title> [<wants_acommodation>]"""
-        # person_name = arg["<first_name>"] + spacer + arg["<last_name>"]
         first_name = arg["<first_name>"]
         last_name = arg["<last_name>"]
         title = arg["<title>"]
@@ -94,37 +92,6 @@ class Interactive (cmd.Cmd):
         dojo.add_person(first_name, last_name, title, wants_accomodation)
 
     
-
-    @docopt_cmd
-    def do_print_room(self, arg):
-        """Usage: print_room <room_name>"""
-        room_name = arg["<room_name>"]
-
-        dojo.print_room(room_name)
-
-
-    @docopt_cmd
-    def do_print_allocations(self, arg):
-        """Usage: print_allocations [--o=FILENAME]"""
-
-        filename = arg["--o"]
-
-        dojo.print_allocations(filename)
-
-    @docopt_cmd
-    def do_print_unallocated(self, arg):
-        """Usage: print_unallocated [--o=FILENAME]"""
-        filename = arg["--o"]
-
-        dojo.print_unallocated(filename)
-
-    @docopt_cmd
-    def do_load_people(self, arg):
-        """Usage: load_people <file_name>"""
-        filename = arg['<file_name>']                                                               
-
-        dojo.load_people(filename)
-
     def do_quit(self,arg):
         """Quits out of Interactive Mode."""
 
