@@ -85,11 +85,13 @@ class Interactive (cmd.Cmd):
     @docopt_cmd
     def do_add_person(self, arg):
         """Usage: add_person <first_name> <last_name> <title> [<wants_acommodation>]"""
-        person_name = arg["<first_name>"] + spacer + arg["<last_name>"]
+        # person_name = arg["<first_name>"] + spacer + arg["<last_name>"]
+        first_name = arg["<first_name>"]
+        last_name = arg["<last_name>"]
         title = arg["<title>"]
         wants_accomodation = arg["<wants_acommodation>"]
 
-        dojo.add_person(person_name, title, wants_accomodation)
+        dojo.add_person(first_name, last_name, title, wants_accomodation)
 
     
 
