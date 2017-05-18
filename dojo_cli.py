@@ -1,28 +1,34 @@
 #!/usr/bin/env python
 
-""" DOJO
+""" 
+DOJO
 
 Usage:
-dojo create_room                 <room_name> <room_type>
-dojo add_person                  <first_name> <last_name> <title>  [--wants_acommodation = 'N']
-
+    dojo create_room <room_type> <room_name>...
+    dojo add_person <first_name> <last_name> <title>  [--wants_acommodation == 'N']
+    dojo print_room <room_name>
+    dojo print_allocations [--o = FILENAME]
+    dojo (-i | --interactive)
+    dojo (-h | --help | --version)
 
 Options:
--i | --interactive
--h | --help Show this screen
--v | --version
-
-
+    -i, --interactive      Interactive Mode
+    -h, --help             Show this screen
+    -v, --version
 
 """
+
 
 import sys
 import cmd
 from docopt import docopt, DocoptExit
 from dojo_model import Dojo
 from people_model import Fellow, Staff
-
+from room_model import Living, Office
+# from pyfiglet import figlet_format
+# from termcolor import cprint , colored
 dojo = Dojo()
+spacer = " "
 
 def docopt_cmd(func):
     """
@@ -35,13 +41,11 @@ def docopt_cmd(func):
 
         except DocoptExit as e:
 
-
-            print('Invalid Command!')
+            print('Invalid Command!, Type help')
             print(e)
             return
 
         except SystemExit:
-
 
             return
 
@@ -52,59 +56,73 @@ def docopt_cmd(func):
     fn.__dict__.update(func.__dict__)
     return fn
 
-def start():
+class Interactive (cmd.Cmd):
 
-    print ("LOADING DOJO >>>>>>>>>>>>>>>>>>")
+    print("=" * 30 + "\nWELCOME\n" + "=" * 30)
+    print (spacer)
+    print (spacer)
+    intro = "ALLOCATION MADE EASIER AND FASTER"
+    prompt = "> "
+    print (spacer)
+    print (spacer)
+    print("=" * 60)
+    print (spacer)
+    print (spacer)
+    
 
-    intro = 'Welcome to the DOJO SPACE ALLOCATION APP'
-
-    print ("Type help for a list of commands")
-
-  
-
-class Interactive(cmd.Cmd):
-
-    dojo_prompt = 'DOJO'
-    prompt = dojo_prompt
 
     @docopt_cmd
-    def do_create_room (self,arg):
-        
-        """ Usage: create_room <room_name> <room_type> """
+    def do_create_room(self, arg):
+        """Usage: create_room <room_type> <room_name>..."""
 
         room_name = arg["<room_name>"]
         room_type = arg["<room_type>"]
 
         if room_name and room_type:
-            result = dojo.create_room (room_name, room_type)
+            dojo.create_room (room_name, room_type)
+
 
     @docopt_cmd
-    def do_add_person (self,arg):
-
-        """ Usage: add_person <first_name> <last_name> <title> [--wants_accomodation = 'N'] """
-
-        first_name = arg["<first_name>"]
-        last_name = arg["<last_name>"]
+    def do_add_person(self, arg):
+        """Usage: add_person <first_name> <last_name> <title> [<wants_acommodation>]"""
+        person_name = arg["<first_name>"] + spacer + arg["<last_name>"]
         title = arg["<title>"]
-        wants_accomodation = arg["<wants_accomodation>"]
+        wants_accomodation = arg["<wants_acommodation>"]
 
-        title == "FELLOW" or "STAFF"
+        dojo.add_person(person_name, title, wants_accomodation)
 
-        if wants_accomodation is None:
-            wants_accomodation == "N"
-
-            print (self.dojo.add_person (first_name, last_name, title))
-
-        else:
-            print (self.dojo.add_person (first_name, last_name, title, wants_acommodation))
+    
 
     @docopt_cmd
-    def do_clear(self, arg):
-        """Clears screen"""
-        os.system("clear")
+    def do_print_room(self, arg):
+        """Usage: print_room <room_name>"""
+        room_name = arg["<room_name>"]
+
+        dojo.print_room(room_name)
 
 
     @docopt_cmd
+    def do_print_allocations(self, arg):
+        """Usage: print_allocations [--o=FILENAME]"""
+
+        filename = arg["--o"]
+
+        dojo.print_allocations(filename)
+
+    @docopt_cmd
+    def do_print_unallocated(self, arg):
+        """Usage: print_unallocated [--o=FILENAME]"""
+        filename = arg["--o"]
+
+        dojo.print_unallocated(filename)
+
+    @docopt_cmd
+    def do_load_people(self, arg):
+        """Usage: load_people <file_name>"""
+        filename = arg['<file_name>']                                                               
+
+        dojo.load_people(filename)
+
     def do_quit(self,arg):
         """Quits out of Interactive Mode."""
 
@@ -113,9 +131,11 @@ class Interactive(cmd.Cmd):
 
 opt = docopt(__doc__, sys.argv[1:])
 
-if opt['--interactive']:
-    os.system("clear")
-    start()
-    interactive().cmdloop()
+if opt["--interactive"]:
+    try:
+        print (__doc__)
+        Interactive().cmdloop()
+    except KeyboardInterrupt:
+        print ("Exiting")
 
 print(opt)
