@@ -1,25 +1,14 @@
 import unittest
 import sys
 from unittest import TestCase
-from dojo import Dojo
-from room import Room, Office, Living
-# from main import dojo.Dojo
-# from main import room.Room
+from dojo_model import Dojo
+from room_model import Room, Office, Living
 
-# AssertIn = Test that first is in second.  If not, the test will fail.
-# AssertEqual = Test that first and second are equal. If the values do not compare equal, the test will fail.
 
 class TestDojo (unittest.TestCase):
     
     def setUp (self):
         self.dojo = Dojo()
-        self.dojo.offices = []
-        self.dojo.livingspaces = []
-        self.dojo.vacant_rooms = []
-        self.dojo.vacant_offices = []
-        self.dojo.vacant_livingspaces = []
-        self.dojo.rooms = []
-
 
     def test_create_room (self):
 
@@ -52,10 +41,11 @@ class TestDojo (unittest.TestCase):
         """ Tests if room created already exists """
 
         self.dojo.create_room ("MARS", "OFFICE")
-        room_names = [room.room_name for room in self.dojo.rooms]
-        self.assertIn ("MARS", self.room_name)
-        entry = self.dojo.create_room ("MARS", "OFFICE")
-        self.assertEqual(entry, "Sorry, Room Name already exists.  Kindly Choose another name")
+        self.dojo.create_room ("MARS", "OFFICE")
+        self.assertEqual(len(self.dojo.rooms), 1)
+
+if __name__ == "__main__":
+    unittest.main()
 
 
 
