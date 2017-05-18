@@ -1,3 +1,5 @@
+import unittest
+
 spacer = " "
 
 
@@ -11,7 +13,7 @@ class Person(object):
         self.title = title  
 
     def __repr__(self):
-        return "<Person %s>" % self.name
+        return "<Person %s>" % self.person_name
 
 
 class Staff(Person):
@@ -20,11 +22,11 @@ class Staff(Person):
 
     def __init__(self,first_name, last_name, title, wants_accomodation = "N"):
 
-        super(Staff, self).__init__(self.name)
+        super(Staff, self).__init__(self.person_name)
         self.title = title
 
     def __repr__(self):
-        return "<Staff %s>" % self.name
+        return "<Staff %s>" % self.person_name
 
 
 class Fellow(Person):
@@ -36,4 +38,6 @@ class Fellow(Person):
         self.id = person_id
 
     def __repr__(self):
-        return "<Fellow %s>" % self.name
+        return "<Fellow %s>" % self.person_name
+
+unittest.main()
