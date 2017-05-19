@@ -37,7 +37,7 @@ class TestDojo (unittest.TestCase):
         self.assertEqual (len(self.dojo.livingspaces), 0)
         self.dojo.create_room ("MERCURY", "LIVINGSPACE")
         self.dojo.create_room ("VENUS", "LIVINGSPACE")
-        self.assertEqual(len(self.dojo.livingspaces), 1)
+        self.assertEqual(len(self.dojo.livingspaces), 2)
 
 
     def test_room_name_repeated (self):
