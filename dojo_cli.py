@@ -67,12 +67,10 @@ class Interactive (cmd.Cmd):
     print(spacer)
     intro = "                         >>> LETS ROOM UP!!! <<<                     "
     print (spacer)
-    prompt = "> "
+    prompt = "DOJO >> "
     print (spacer)
 
     
-
-
     @docopt_cmd
     def do_create_room(self, arg):
         """Usage: create_room <room_type> <room_name>..."""
