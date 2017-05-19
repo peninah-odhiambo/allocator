@@ -77,6 +77,8 @@ class Dojo (object):
 
     def add_person (self, first_name, last_name, title, wants_accomodation ="N"):
         """Adds person and Allocates to room """
+        title = title.upper()
+        wants_accomodation = wants_accomodation.upper()
         person_name = first_name + spacer + last_name
         self.title = title
         random_livingspace = random.choice(self.unallocated_livingspaces)
