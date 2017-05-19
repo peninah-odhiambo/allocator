@@ -76,23 +76,27 @@ class Interactive (cmd.Cmd):
     @docopt_cmd
     def do_create_room(self, arg):
         """Usage: create_room <room_type> <room_name>..."""
-     
-        for room_name in arg["<room_name>"]:
-            room_type = arg["<room_type>"]
-            dojo.create_room (room_name, room_type)
-            print (spacer)
+        try:
+            for room_name in arg["<room_name>"]:
+                room_type = arg["<room_type>"]
+                dojo.create_room (room_name, room_type)
+                print (spacer)
+        except:
+            print ("Create room")
 
 
     @docopt_cmd
     def do_add_person(self, arg):
         """Usage: add_person <first_name> <last_name> <title> [<wants_acommodation>]"""
-        first_name = arg["<first_name>"]
-        last_name = arg["<last_name>"]
-        title = arg["<title>"]
-        wants_accomodation = arg["<wants_acommodation>"]
+        try:
+            first_name = arg["<first_name>"]
+            last_name = arg["<last_name>"]
+            title = arg["<title>"]
+            wants_accomodation = arg["<wants_acommodation>"]
 
-        dojo.add_person(first_name, last_name, title, wants_accomodation)
-
+            dojo.add_person(first_name, last_name, title, wants_accomodation)
+        except:
+            print ("No Rooms Available cannot add person")
     
     def do_quit(self,arg):
         """Quits out of Interactive Mode."""
