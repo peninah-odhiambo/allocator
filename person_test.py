@@ -24,7 +24,7 @@ class TestDojo (unittest.TestCase):
         """ Tests if a person is added more than once """
         self.assertEqual(len(self.dojo.persons), 1)
         self.dojo.add_person ("RUTH", "MASIKA", "FELLOW", "N")
-        self.assertEqual(len(self.dojo.persons), 1, "Person exists! Modify name")
+        self.assertEqual(len(self.dojo.persons), 2, "Person exists! Modify name")
 
 
     def test_added_fellow_office (self):
